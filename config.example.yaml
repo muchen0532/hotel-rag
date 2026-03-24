@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+llm:
+  provider: "claude"        # 模型提供者，例如: claude / openai
+  base_url: ""              # API Base URL
+  api_key: "YOUR_API_KEY"   # 替换为你的 API Key
+  model: "claude-instant-1" # 模型名称
+  max_tokens: 1000          # 单次生成的最大 token 数
+
+
+data:
+  csv_path: "hotel_data.csv"
+  summary_path: "summary.json"
+  top_k: 10             # 每次检索返回几条

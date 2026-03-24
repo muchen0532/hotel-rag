@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>酒店入住率智能问答</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #0f0f0f;
+    --surface: #1a1a1a;
+    --border: #2a2a2a;
+    --accent: #c8a96e;
+    --accent-dim: #8a7048;
+    --text: #e8e0d4;
+    --text-dim: #6b6560;
+    --green: #4a9e6b;
+    --red: #9e4a4a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif SC', serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    width: 100%;
+    padding: 32px 40px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+  }
+
+  header h1 {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+  }
+
+  header .subtitle {
+    font-size: 12px;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  #stats-bar {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-left: auto;
+    display: flex;
+    gap: 20px;
+  }
+
+  #stats-bar span { color: var(--accent); }
+
+  .main {
+    width: 100%;
+    max-width: 860px;
+    padding: 40px 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .examples {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .example-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 6px 14px;
+    border-radius: 2px;
+    font-size: 12px;
+    font-family: 'Noto Serif SC', serif;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .example-btn:hover {
+    border-color: var(--accent-dim);
+    color: var(--accent);
+  }
+
+  .input-area {
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+  }
+
+  textarea {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'Noto Serif SC', serif;
+    font-size: 15px;
+    padding: 14px 16px;
+    border-radius: 2px;
+    resize: none;
+    min-height: 56px;
+    max-height: 160px;
+    line-height: 1.6;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  textarea:focus { border-color: var(--accent-dim); }
+  textarea::placeholder { color: var(--text-dim); }
+
+  button#ask-btn {
+    background: var(--accent);
+    color: #0f0f0f;
+    border: none;
+    padding: 14px 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: opacity 0.15s;
+    white-space: nowrap;
+    height: 56px;
+  }
+
+  button#ask-btn:hover { opacity: 0.85; }
+  button#ask-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .answer-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .answer-header {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .answer-header .tag {
+    background: var(--accent);
+    color: #0f0f0f;
+    padding: 2px 8px;
+    font-size: 10px;
+    border-radius: 1px;
+  }
+
+  .answer-body {
+    padding: 20px 20px;
+    line-height: 1.9;
+    font-size: 15px;
+  }
+
+  .context-toggle {
+    padding: 10px 16px;
+    border-top: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .context-toggle:hover { color: var(--accent); }
+
+  .context-body {
+    display: none;
+    padding: 16px;
+    border-top: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    white-space: pre-wrap;
+    line-height: 1.7;
+    background: var(--bg);
+  }
+
+  .loading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  .dot {
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 1.2s infinite;
+  }
+  .dot:nth-child(2) { animation-delay: 0.2s; }
+  .dot:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes pulse {
+    0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+    40% { opacity: 1; transform: scale(1); }
+  }
+
+  .error { color: var(--red); padding: 16px 20px; font-size: 14px; }
+
+  .history { display: flex; flex-direction: column; gap: 16px; }
+
+  .q-label {
+    font-size: 12px;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 6px;
+  }
+
+  .q-text {
+    font-size: 15px;
+    color: var(--text);
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>酒店入住率智能问答</h1>
+  <div class="subtitle">RAG Demo</div>
+  <div id="stats-bar">加载中...</div>
+</header>
+
+<div class="main">
+  <div class="examples" id="examples">
+    <button class="example-btn">CBD区域酒店平均入住率怎么样？</button>
+    <button class="example-btn">经济型酒店和高端酒店差异有多大？</button>
+    <button class="example-btn">哪个品牌的入住率最稳定？</button>
+    <button class="example-btn">郊区旅游区酒店表现如何？</button>
+    <button class="example-btn">入住率最高的酒店是哪家？</button>
+  </div>
+
+  <div class="input-area">
+    <textarea id="question" placeholder="用自然语言提问，例如：CBD区域的酒店入住率趋势如何？" rows="2"></textarea>
+    <button id="ask-btn" onclick="askQuestion()">提问 →</button>
+  </div>
+
+  <div class="history" id="history"></div>
+</div>
+
+<script>
+const API = 'http://localhost:8080';
+
+// 加载统计信息
+async function loadStats() {
+  try {
+    const r = await fetch(`${API}/stats`);
+    const d = await r.json();
+    document.getElementById('stats-bar').innerHTML =
+      `记录 <span>${d.total_records?.toLocaleString()}</span> 条 &nbsp;|&nbsp; 酒店 <span>${d.hotels}</span> 家 &nbsp;|&nbsp; 品牌 <span>${d.brands}</span> 个`;
+  } catch {
+    document.getElementById('stats-bar').textContent = '后端未连接';
+  }
+}
+
+// 示例按钮
+document.querySelectorAll('.example-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.getElementById('question').value = btn.textContent;
+    askQuestion();
+  });
+});
+
+// 回车发送
+document.getElementById('question').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    askQuestion();
+  }
+});
+
+async function askQuestion() {
+  const q = document.getElementById('question').value.trim();
+  if (!q) return;
+
+  const btn = document.getElementById('ask-btn');
+  btn.disabled = true;
+
+  const history = document.getElementById('history');
+
+  // 添加问题+loading
+  const card = document.createElement('div');
+  card.className = 'answer-card';
+  card.innerHTML = `
+    <div style="padding:16px 20px">
+      <div class="q-label">问题</div>
+      <div class="q-text">${q}</div>
+    </div>
+    <div class="loading">
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <span>检索数据并生成回答...</span>
+    </div>`;
+  history.insertBefore(card, history.firstChild);
+
+  document.getElementById('question').value = '';
+
+  try {
+    const res = await fetch(`${API}/query`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question: q })
+    });
+
+    const data = await res.json();
+
+    card.innerHTML = `
+      <div class="answer-header">
+        <span>${new Date().toLocaleTimeString('zh-CN')}</span>
+        <span class="tag">AI 回答</span>
+      </div>
+      <div style="padding:16px 20px">
+        <div class="q-label">问题</div>
+        <div class="q-text">${q}</div>
+      </div>
+      <div class="answer-body">${data.answer.replace(/\n/g, '<br>')}</div>
+      <div class="context-toggle" onclick="toggleContext(this)">▶ 查看检索到的原始数据</div>
+      <div class="context-body">${data.context}</div>`;
+
+  } catch (err) {
+    card.innerHTML = `
+      <div style="padding:16px 20px">
+        <div class="q-label">问题</div>
+        <div class="q-text">${q}</div>
+      </div>
+      <div class="error">连接后端失败，请确认 Go 服务已启动：go run main.go<br><br>${err.message}</div>`;
+  }
+
+  btn.disabled = false;
+}
+
+function toggleContext(el) {
+  const body = el.nextElementSibling;
+  if (body.style.display === 'block') {
+    body.style.display = 'none';
+    el.textContent = '▶ 查看检索到的原始数据';
+  } else {
+    body.style.display = 'block';
+    el.textContent = '▼ 收起原始数据';
+  }
+}
+
+loadStats();
+</script>
+</body>
+</html>
