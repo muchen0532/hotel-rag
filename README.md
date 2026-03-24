@@ -86,19 +86,6 @@ Open http://localhost:8080
 Edit `config.yaml`, restart service:
 
 ```yaml
-# Claude (via Volcengine)
-llm:
-  provider: "claude"
-  base_url: "https://ark.cn-beijing.volces.com/api/coding"
-  api_key: ""
-  model: "doubao-seed-2.0-code"
-
-# DeepSeek
-llm:
-  provider: "deepseek"
-  base_url: "https://api.deepseek.com"
-  api_key: "sk-xxxx"
-  model: "deepseek-chat"
 
 # Ollama (local, free)
 llm:
@@ -130,3 +117,10 @@ Each query sends two types of context to the LLM:
 2. **Retrieved records**: top-K records matched by keyword from the in-memory CSV
 
 This ensures aggregation questions (trends, comparisons) are answered from full-dataset statistics, while specific queries (a single hotel, a specific date) are answered from retrieved records.
+
+
+---
+
+## Demo
+
+![screenshot](docs/screenshots/demo.png)
