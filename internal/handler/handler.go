@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -9,14 +10,25 @@ import (
 	"hotel-rag/internal/llm"
 )
 
+// Retriever 检索接口
+type Retriever interface {
+	Search(ctx context.Context, query string, topK int) ([]db.SearchResult, error)
+}
+
 type Handler struct {
-	db   *db.VectorDB
-	llm  llm.Client
-	topK int
+	db        *db.VectorDB
+	retriever Retriever
+	llm       llm.Client
+	topK      int
 }
 
 func New(vectorDB *db.VectorDB, llmClient llm.Client, topK int) *Handler {
 	return &Handler{db: vectorDB, llm: llmClient, topK: topK}
+}
+
+// WithRetriever 设置向量检索器
+func (h *Handler) WithRetriever(r Retriever) {
+	h.retriever = r
 }
 
 func (h *Handler) RegisterRoutes(mux *http.ServeMux) {
@@ -41,13 +53,32 @@ func (h *Handler) query(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	results := h.db.Search(req.Question, h.topK)
+	// 检索：优先用向量检索，失败或未配置则使用关键词检索
+	var results []db.SearchResult
+	retrieverUsed := "keyword"
+
+	if h.retriever != nil {
+		var err error
+		results, err = h.retriever.Search(r.Context(), req.Question, h.topK)
+		if err != nil {
+			fmt.Printf("向量检索失败，使用关键词检索: %v\n", err)
+		} else {
+			retrieverUsed = "vector"
+		}
+	}
+
+	if retrieverUsed == "keyword" {
+		results = h.db.Search(req.Question, h.topK)
+	}
+
 	context := h.db.BuildContext(results)
 	summary := h.db.Summary()
 	prompt := fmt.Sprintf("全局统计摘要：\n%s\n\n检索到的相关数据：\n%s\n\n用户问题：%s",
 		summary, context, req.Question)
 
-	fmt.Println(prompt)
+	// fmt.Printf("[prompt] %s\n", prompt)
+
+	fmt.Printf("[retriever=%s] %s\n", retrieverUsed, req.Question)
 
 	answer, err := h.llm.Ask(r.Context(), prompt)
 	if err != nil {
@@ -55,7 +86,10 @@ func (h *Handler) query(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	writeJSON(w, map[string]string{"answer": answer, "context": context})
+	writeJSON(w, map[string]string{
+		"answer":  answer,
+		"context": context,
+	})
 }
 
 func (h *Handler) stats(w http.ResponseWriter, r *http.Request) {

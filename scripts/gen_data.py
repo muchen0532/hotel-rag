@@ -10,7 +10,7 @@ import pandas as pd
 
 np.random.seed(42)
 
-HOTELS = 20
+HOTELS = 10
 BRANDS = ["economy", "midscale", "premium"]
 DISTRICTS = ["cbd", "suburban", "transport_hub"]
 

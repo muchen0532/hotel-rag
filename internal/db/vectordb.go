@@ -10,6 +10,11 @@ import (
 	"strings"
 )
 
+type VectorDB struct {
+	records []HotelRecord
+	summary string
+}
+
 type HotelRecord struct {
 	HotelID   string
 	HotelName string
@@ -22,11 +27,6 @@ type HotelRecord struct {
 type SearchResult struct {
 	Record HotelRecord
 	Score  float64
-}
-
-type VectorDB struct {
-	records []HotelRecord
-	summary string // Python预计算的统计摘要，原始json字符串
 }
 
 // LoadCSV 加载CSV到内存
