@@ -30,7 +30,25 @@ func main() {
 	if err != nil {
 		log.Fatalf("初始化LLM失败: %v", err)
 	}
+
 	h := handler.New(vectorDB, llmClient, cfg.Data.TopK)
+
+	// 初始化 Qdrant 向量检索
+	if cfg.Qdrant.JinaAPIKey != "" {
+		qdrantRetriever, err := db.NewQdrantRetriever(db.QdrantConfig{
+			QdrantURL:  cfg.Qdrant.URL,
+			Collection: cfg.Qdrant.Collection,
+			JinaAPIKey: cfg.Qdrant.JinaAPIKey,
+		})
+		if err != nil {
+			log.Printf("警告: 初始化Qdrant失败，使用关键词检索: %v", err)
+		} else {
+			h.WithRetriever(qdrantRetriever)
+			log.Printf("向量检索已启用: %s / %s", cfg.Qdrant.URL, cfg.Qdrant.Collection)
+		}
+	} else {
+		log.Printf("未配置 Qdrant，使用关键词检索")
+	}
 
 	mux := http.NewServeMux()
 	h.RegisterRoutes(mux)

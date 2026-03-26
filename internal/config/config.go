@@ -11,6 +11,7 @@ type Config struct {
 	Server ServerConfig `yaml:"server"`
 	LLM    LLMConfig    `yaml:"llm"`
 	Data   DataConfig   `yaml:"data"`
+	Qdrant QdrantConfig `yaml:"qdrant"`
 }
 
 type ServerConfig struct {
@@ -18,7 +19,7 @@ type ServerConfig struct {
 }
 
 type LLMConfig struct {
-	Provider  string `yaml:"provider"` // claude | ollama
+	Provider  string `yaml:"provider"`
 	BaseURL   string `yaml:"base_url"`
 	APIKey    string `yaml:"api_key"`
 	Model     string `yaml:"model"`
@@ -29,6 +30,12 @@ type DataConfig struct {
 	CSVPath     string `yaml:"csv_path"`
 	SummaryPath string `yaml:"summary_path"`
 	TopK        int    `yaml:"top_k"`
+}
+
+type QdrantConfig struct {
+	URL        string `yaml:"url"`
+	Collection string `yaml:"collection"`
+	JinaAPIKey string `yaml:"jina_api_key"`
 }
 
 func Load(path string) (*Config, error) {
