@@ -39,4 +39,26 @@ Same query: *"靠近地铁的酒店"*
 |---|---|
 | ![keyword](docs/screenshots/demo.png) | ![vector](docs/screenshots/demo_vector.png) |
 
+
 Keyword search has no "metro" field to match against, so it falls back to a vague district-level answer. Vector search retrieves semantically relevant records and returns a concrete hotel list.
+
+## Evaluation
+
+A benchmark is conducted across 20 queries, covering different query types:
+
+- Semantic queries (e.g. "靠近地铁的酒店")
+- Keyword queries (exact match)
+- Aggregation queries
+- Temporal queries
+- Comparison queries
+
+### Key Findings
+
+- **Vector search significantly outperforms keyword search on semantic queries**
+- **Keyword search remains competitive for exact match queries**
+- **Aggregation queries rely on structured summaries rather than retrieval**
+- **Both methods fail when required data is missing**
+
+See full report:
+
+👉 `docs/eval_result/index.html`

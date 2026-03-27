@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh"><head><meta charset="UTF-8"><title>hotel-rag 检索评测报告</title>
+<style>
+  :root { --bg:#0f0f0f; --surface:#1a1a1a; --border:#2a2a2a; --accent:#c8a96e; --text:#e8e0d4; --text-dim:#6b6560; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',sans-serif; padding:40px; }
+  h1 { color:var(--accent); font-size:22px; margin-bottom:6px; }
+  .meta { color:var(--text-dim); font-size:12px; font-family:monospace; margin-bottom:32px; }
+  h2 { font-size:14px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.1em; margin:32px 0 12px; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface); color:var(--text-dim); padding:10px 14px; text-align:left; border-bottom:1px solid var(--border); }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); vertical-align:top; }
+  tr:hover td { background:#1e1e1e; }
+</style></head><body>
+<h1>hotel-rag 检索评测报告</h1>
+<div class="meta">生成时间: 2026-03-26 18:11:58 · 共 20 个问题 · 2 种模式</div>
+<h2>汇总：各类型平均分（1-5）</h2>
+<table><thead><tr><th>Query 类型</th><th>keyword</th><th>vector</th></tr></thead><tbody>
+<tr><td>语义查询（无直接关键词，考验向量检索）</td><td style="color:#9e4a4a;font-weight:600">2.75</td><td style="color:#c8a96e;font-weight:600">3.75</td></tr><tr><td>关键词查询（精确字段匹配，关键词检索占优）</td><td style="color:#4a9e6b;font-weight:600">4.25</td><td style="color:#4a9e6b;font-weight:600">5.0</td></tr><tr><td>聚合统计（依赖 summary.json，两种检索均可）</td><td style="color:#4a9e6b;font-weight:600">5.0</td><td style="color:#4a9e6b;font-weight:600">5.0</td></tr><tr><td>时间相关（季节、节假日）</td><td style="color:#c8a96e;font-weight:600">3.5</td><td style="color:#c8a96e;font-weight:600">3.5</td></tr><tr><td>对比分析（多个实体）</td><td style="color:#4a9e6b;font-weight:600">5.0</td><td style="color:#4a9e6b;font-weight:600">5.0</td></tr>
+<tr style="border-top:2px solid var(--border)"><td><strong>总体平均</strong></td><td><strong>4.1</strong></td><td><strong>4.45</strong></td></tr>
+</tbody></table>
+<h2>详细结果</h2>
+<table><thead><tr><th>ID</th><th>类型</th><th>问题</th><th>keyword</th><th>vector</th></tr></thead>
+<tbody><tr>
+          <td><span style="color:#4a9e6b;font-family:monospace">A01</span></td>
+          <td><span style="color:#4a9e6b">aggregation</span></td>
+          <td>2025年全年入住率最高的品牌是哪个？</td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">29268ms · 回答准确给出了2025年全年入住率最高的品牌类别及具体入住率数值，直接回应了问题</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">2025年全年入住率最高的品牌是midscale（中档），其全年平均入住率为0.7303。</div>
+                  </details></td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">15769ms · 回答准确给出了2025年全年入住率最高的品牌类别及具体平均入住率数值，直接回应了问题</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">2025年全年入住率最高的品牌是midscale（中端），平均入住率为0.7303。</div>
+                  </details></td></tr><tr>
+          <td><span style="color:#4a9e6b;font-family:monospace">A02</span></td>
+          <td><span style="color:#4a9e6b">aggregation</span></td>
+          <td>哪个区域的平均入住率最高？</td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">27307ms · 回答明确指出了平均入住率最高的区域是suburban（郊区），并给出了具体数值和年份，准确完整地回答了问题。</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">2025年，suburban（郊区）的平均入住率最高，为0.6809。</div>
+                  </details></td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">20684ms · 回答准确给出了平均入住率最高的区域及具体数值，直接回答了问题</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">根据全局统计摘要，2025年各区域平均入住率中，suburban（郊区）最高，为0.6809。</div>
+                  </details></td></tr><tr>
+          <td><span style="color:#4a9e6b;font-family:monospace">A03</span></td>
+          <td><span style="color:#4a9e6b">aggregation</span></td>
+          <td>所有酒店的平均入住率是多少？</td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">29017ms · 回答准确给出了平均入住率的具体数值及百分比形式，直接回应了问题</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">根据全局统计摘要，2025年所有酒店的平均入住率为0.6351（即63.51%）。</div>
+                  </details></td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">23000ms · 回答准确给出了所有酒店平均入住率的具体数值及对应百分比，直接回答了问题</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">根据全局统计摘要，2025年所有酒店的平均入住率为0.6351（即63.51%）。</div>
+                  </details></td></tr><tr>
+          <td><span style="color:#4a9e6b;font-family:monospace">A04</span></td>
+          <td><span style="color:#4a9e6b">aggregation</span></td>
+          <td>入住率的最大值和最小值分别是多少？</td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">25340ms · 回答准确给出了酒店入住率的最大值（1.0）和最小值（0.2872），信息具体，直接回答了问题。</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">2025年全年酒店入住率的最大值为1.0，最小值为0.2872。</div>
+                  </details></td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">21995ms · 回答准确给出了2025年酒店入住率的最大值（1.0/100%）和最小值（0.2872/28.72%），信息具体明确，直接回应了问题。</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">2025年全年酒店入住率最大值为1.0（即100%），最小值为0.2872（即28.72%）。</div>
+                  </details></td></tr><tr>
+          <td><span style="color:#9e4a6b;font-family:monospace">C01</span></td>
+          <td><span style="color:#9e4a6b">comparison</span></td>
+          <td>经济型和高端酒店入住率差距有多大？</td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">25358ms · 回答准确给出了2025年经济型和高端酒店的入住率具体数值，并计算出两者差距，直接回答了问题</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">2025年全年，经济型酒店的平均入住率为64.27%，高端酒店为58.62%，两者差距为5.65个百分点。</div>
+                  </details></td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">29537ms · 回答准确给出了2025年经济型和高端酒店的具体入住率数值，并计算出明确差距，直接回应了问题。</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">2025年经济型酒店全年平均入住率为0.6427，高端（premium）酒店为0.5862，差距为0.0565。</div>
+                  </details></td></tr><tr>
+          <td><span style="color:#9e4a6b;font-family:monospace">C02</span></td>
+          <td><span style="color:#9e4a6b">comparison</span></td>
+          <td>CBD和郊区酒店哪个入住率更高？</td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">25763ms · 回答准确给出了2025年郊区和CBD酒店的具体入住率数据，直接回应了问题</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">根据全局统计摘要，2025年全年郊区（suburban）酒店的平均入住率为0.6809，高于CBD酒店的0.5891。</div>
+                  </details></td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">30768ms · 回答准确给出了2025年统计的CBD与郊区酒店具体入住率数值，并明确得出郊区酒店入住率更高的结论，直接回应了问题</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">根据2025年全局统计摘要，suburban（郊区）酒店入住率更高：
+- suburban（郊区）：均值0.6809
+- cbd（中央商务区）：均值0.5891</div>
+                  </details></td></tr><tr>
+          <td><span style="color:#9e4a6b;font-family:monospace">C03</span></td>
+          <td><span style="color:#9e4a6b">comparison</span></td>
+          <td>对比一下各区域酒店的表现</td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">28698ms · 回答准确、具体地对比了三个区域酒店的入住率均值、标准差、样本量及范围，清晰呈现了各区域的表现差异。</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">2025年各区域酒店入住率表现对比如下：
+1. 郊区（suburban）：均值0.6809最高，标准差0.1512波动最大，样本量1095，范围0.3416-1.0；
+2. 交通枢纽（transport_hub）：均值0.6260，标准差0.1191，样本量1825最大，范围0.2872-1.0；
+3. 中央商务区（cbd）：均值0.5891最低，标准差0.0861最稳定，样本量730，范围0.3701-0.8716。</div>
+                  </details></td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">29126ms · 回答准确具体，从均值、标准差、区间三个维度对比了郊区、交通枢纽、CBD的酒店入住率表现，并给出清晰结论，直接回应了问题</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">2025年各区域酒店入住率表现如下：
+1. **郊区（suburban）**：均值0.6809最高，标准差0.1512波动最大，区间0.3416-1.0；
+2. **交通枢纽（transport_hub）**：均值0.626，标准差0.1191，区间0.2872-1.0（含全局最低值）；
+3. **CBD**：均值0.5891最低，标准差0.0861最稳定，区间0.3701-0.8716。
+
+结论：郊区整体入住率领先但波动大，CBD表现最平稳但均值最低。</div>
+                  </details></td></tr><tr>
+          <td><span style="color:#9e4a6b;font-family:monospace">C04</span></td>
+          <td><span style="color:#9e4a6b">comparison</span></td>
+          <td>入住率最高和最低的酒店相差多少</td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">27560ms · 回答准确、具体，直接给出了最高和最低入住率的酒店名称及数值，并计算了差值</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">入住率最高的酒店是盛都商务酒店（H007），年均入住率0.8495；最低的是君阁度假酒店（H005），年均入住率0.4891 。两者相差0.3604。</div>
+                  </details></td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">25980ms · 回答准确给出了入住率最高和最低的酒店名称及具体数值，并计算出了相差值，直接回答了问题</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">根据提供的全局统计摘要，2025年酒店中入住率年均最高的是盛都商务酒店（H007，midscale，suburban），年均入住率为0.8495；年均最低的是君阁度假酒店（H005，premium，transport_hub），年均入住率为0.4891。二者相差0.3604。</div>
+                  </details></td></tr><tr>
+          <td><span style="color:#9e7bd4;font-family:monospace">K01</span></td>
+          <td><span style="color:#9e7bd4">keyword</span></td>
+          <td>CBD区域的酒店入住率如何？</td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">26586ms · 回答准确具体，给出了CBD区域酒店入住率的整体均值、分品牌数据及季节趋势等有意义的数字与结论，直接回应了问题。</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">CBD区域2025年酒店入住率统计如下：
+- 整体均值：58.91%，标准差8.61%，区间37.01%-87.16%
+- 分品牌看，区域内中端（midscale）酒店表现优于高端（premium）：
+  - 中端：仅锦城大酒店（H008），年均62.53%
+  - 高端：仅君阁商务酒店（H004），年均55.29%
+- 季节趋势：1-4月较高（1月均值59.43%），9月触底（君阁商务低至37.01%）</div>
+                  </details></td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">27991ms · 回答准确具体，给出了2025年CBD区域酒店整体及两家具体酒店的入住率数据，包含年均值、峰值谷值月份及数值、样本数等详细信息，直接回答了问题</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">2025年CBD区域酒店全年平均入住率为58.91%，样本数730，标准差0.0861，区间0.3701-0.8716。
+该区域涉及2家酒店：
+- 锦城大酒店（midscale）：年均62.53%，峰值出现在2月（71.38%），谷值在9月（55.01%）；
+- 君阁商务酒店（premium）：年均55.29%，峰值在4月（62.74%），谷值在11月（49.51%）。</div>
+                  </details></td></tr><tr>
+          <td><span style="color:#9e7bd4;font-family:monospace">K02</span></td>
+          <td><span style="color:#9e7bd4">keyword</span></td>
+          <td>经济型酒店的平均入住率</td><td>
+                  <div style="color:#9e4a4a;font-weight:600;margin-bottom:4px">2/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">27270ms · 仅以华阁宾馆单个酒店数据作答，样本过于特殊且局限，无法代表整体经济型酒店的平均入住率情况</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">2025年全年经济型酒店（仅华阁宾馆）的平均入住率为0.6427。</div>
+                  </details></td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">16673ms · 回答准确给出了2025年经济型酒店的具体平均入住率数值，直接回应了问题</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">根据全局统计摘要，2025年全年经济型酒店（economy）的平均入住率为0.6427（64.27%）。</div>
+                  </details></td></tr><tr>
+          <td><span style="color:#9e7bd4;font-family:monospace">K03</span></td>
+          <td><span style="color:#9e7bd4">keyword</span></td>
+          <td>premium品牌酒店表现怎么样？</td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">30892ms · 回答准确具体，给出了premium品牌酒店2025年入住率的详细统计数据，包括样本量、核心指标及与其他定位品牌的对比，直接回答了问题</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">premium品牌酒店2025年全年入住率表现如下：
+1. 整体规模：共2190个数据样本
+2. 核心指标：均值0.5862，标准差0.1107，最小值0.2872，最大值1.0
+3. 对比定位：入住率均值低于midscale（0.7303）和economy（0.6427）品牌，波动介于两者之间。</div>
+                  </details></td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">26305ms · 回答准确具体，从整体情况、品牌对比、月际波动三个维度用详实数据直接回答了premium品牌酒店的表现</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">2025年premium品牌酒店表现如下：
+1. 整体情况：样本量2190，平均入住率58.62%，标准差0.1107，最低28.72%，最高100%；
+2. 品牌对比：在三个品牌中位列第三，低于midscale（73.03%）和economy（64.27%）；
+3. 月际波动：1-5月较高（61.16%-63.65%，其中2-4月表现最好，9月最低（46.98%-64.06%），下半年整体回落。</div>
+                  </details></td></tr><tr>
+          <td><span style="color:#9e7bd4;font-family:monospace">K04</span></td>
+          <td><span style="color:#9e7bd4">keyword</span></td>
+          <td>H001酒店的入住率数据</td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">27670ms · 回答准确、具体地提供了H001酒店的名称、品牌、位置，以及2025年全年、月度峰值谷值和前10天的详细入住率数据，直接回答了问题</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">H001为华阁宾馆，品牌economy，位于transport_hub。
+2025全年入住率：均值0.6427，标准差0.0777，区间[0.4666, 0.8937]，共365条记录。
+月度峰值为2025-04（均值0.7173），谷值为2025-09（均值0.5593）。
+另附检索到的2025-01-01至01-10入住率：61.5%、65.6%、61.9%、63.7%、62.3%、65.1%、68.3%、59.6%、65.4%、60.4%。</div>
+                  </details></td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">26309ms · 回答准确具体，提供了H001酒店的全称、类型、位置，以及2025年全年入住率的均值、标准差、极值、记录数，还有月度表现和单日记录区间，直接完整回答了问题</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">H001为华阁宾馆，属于经济型酒店，位于交通枢纽区，2025年全年入住率均值0.6427，标准差0.0777，最低0.4666，最高0.8937，共365条记录。月度数据显示2-4月表现较好（均值超0.70），9月最低（均值0.5593）。检索到的10条单日记录入住率在58.2%-73.5%区间。</div>
+                  </details></td></tr><tr>
+          <td><span style="color:#7b9fd4;font-family:monospace">S01</span></td>
+          <td><span style="color:#7b9fd4">semantic</span></td>
+          <td>靠近地铁站的酒店有哪些？</td><td>
+                  <div style="color:#9e4a4a;font-weight:600;margin-bottom:4px">1/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">25091ms · 系统承认无法回答用户的问题</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">现有数据仅按cbd、suburban、transport_hub（交通枢纽）划分区域，未明确标注“靠近地铁站”的具体酒店，无法准确回答。</div>
+                  </details></td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">25184ms · 回答准确列出了属于交通枢纽区域（靠近地铁站）的多个具体酒店名称及编号，直接回应了问题</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">根据提供数据，属于transport_hub区域（通常靠近交通枢纽如地铁站）的酒店有：华阁宾馆（H001）、君庭宾馆（H002）、君阁度假酒店（H005）、锦庭度假酒店（H009）、锦苑大酒店（H010）。</div>
+                  </details></td></tr><tr>
+          <td><span style="color:#7b9fd4;font-family:monospace">S02</span></td>
+          <td><span style="color:#7b9fd4">semantic</span></td>
+          <td>适合商务出差的酒店推荐</td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">4/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">26896ms · 回答给出了具体酒店名称、位置、定位、入住率等数据，推荐理由明确，虽部分酒店商务适合性的支撑信息较少，但整体符合商务出差推荐需求</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">2025年全年入住率数据显示，以下酒店适合商务出差：
+1. 盛都商务酒店（H007，midscale，suburban）：年均入住率0.8495，为样本中最高，全年波动小（std=0.0767），最低入住率0.6683，峰值达1.0。
+2. 君阁商务酒店（H004，premium，cbd）：位于CBD，年均入住率0.5529。
+3. 锦城大酒店（H008，midscale，cbd）：位于CBD，年均入住率0.6253。
+
+推荐优先考虑盛都商务酒店，其入住表现显著优于其他样本酒店。</div>
+                  </details></td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">28133ms · 回答给出了3家适合商务出差的酒店，包含品牌档次、位置、入住率数据及商务相关优势，信息具体准确，直接满足需求</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">结合品牌档次、位置及入住率表现，推荐以下适合商务出差的酒店：
+1. **盛都商务酒店（H007）**：midscale/郊区，年均入住率0.8495（样本酒店最高），全年波动小，旺季（1-5月）常满房。
+2. **君庭宾馆（H002）**：midscale/交通枢纽，年均入住率0.716，位置便利，全年表现稳定。
+3. **锦城大酒店（H008）**：midscale/CBD，年均入住率0.6253，地处核心商务区，符合商务区位需求。</div>
+                  </details></td></tr><tr>
+          <td><span style="color:#7b9fd4;font-family:monospace">S03</span></td>
+          <td><span style="color:#7b9fd4">semantic</span></td>
+          <td>哪些酒店环境安静、适合休息？</td><td>
+                  <div style="color:#9e4a4a;font-weight:600;margin-bottom:4px">1/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">25698ms · 系统因数据不包含酒店环境安静度相关内容而承认无法回答该问题</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">抱歉，当前数据仅包含2025年酒店入住率相关统计（分品牌、区域、月份及单家酒店入住率的均值、标准差、最值等），未涉及酒店环境安静度、休息适配性的描述或评分，无法回答该问题。</div>
+                  </details></td><td>
+                  <div style="color:#9e4a4a;font-weight:600;margin-bottom:4px">1/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">28203ms · 系统承认无法回答用户关于安静适合休息酒店的问题</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">现有数据为2025年酒店入住率统计，包含各酒店的品牌、区域、月度/年度入住率等指标，未涉及“环境安静度”“适合休息”的相关评价或设施信息，无法回答该问题。</div>
+                  </details></td></tr><tr>
+          <td><span style="color:#7b9fd4;font-family:monospace">S04</span></td>
+          <td><span style="color:#7b9fd4">semantic</span></td>
+          <td>节假日期间哪些酒店最抢手？</td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">29685ms · 回答准确具体，结合2025年1-4月（含节假日）数据，指出最抢手的盛都商务酒店并给出年均及峰值入住率等量化信息，同时补充了其他表现较好的酒店，直接回答了问题</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">根据现有数据，2025年全局及各酒店入住率在1-4月较高（其中2025-02、2025-04均值达0.705、0.7052），可对应节假日需求；单酒店中年均及节假日峰值入住率最高的是**盛都商务酒店（H007）**：
+1. 年均入住率0.8495，为样本最高；
+2. 1-4月入住率均超0.88，2025-03达峰值0.941，且多次出现单日100%满房（min/max显示max=1.0）。
+
+其余表现较好的酒店有君庭宾馆（H002，midscale）、锦苑大酒店（H010，premium）。</div>
+                  </details></td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">4/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">7186ms · 回答提供了2025年盛都商务酒店等相关抢手趋势信息，但未明确具体节假日对应的酒店情况</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">根据现有2025年数据， 无法直接识别节假日（需定义具体日期），但提供以下相关趋势供参考：
+1. 全年入住率最高的酒店是midscale品牌的盛都商务酒店（H007），年均入住率0.8495，最高达1.0（满房），1-5月均值超0.88。
+2. 从月度趋势看，1-4月为整体入住率高峰，2025-04均值最高（0.7052），其次是2025-02（0.7050）。
+3. 检索记录中，盛都商务酒店（H007）在2025年1-5月多次出现满房（入住率1.0）。</div>
+                  </details></td></tr><tr>
+          <td><span style="color:#c8a96e;font-family:monospace">T01</span></td>
+          <td><span style="color:#c8a96e">temporal</span></td>
+          <td>春节期间哪些酒店最抢手？</td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">28799ms · 回答准确具体，提供了对应春节期间的时间、具体酒店名称及多项有说服力的入住率数据，直接回答了问题</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">根据2025年2月（对应春节假期）的入住率数据，最抢手的酒店是盛都商务酒店（H007），其2月平均入住率为0.8985，标准差为0.0672，最低0.7779，最高1.0（满房）。</div>
+                  </details></td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">31332ms · 回答准确具体，直接给出了2025年2月（含春节）入住率表现突出的三家酒店名称、类型、位置及具体入住率数据，清晰回应了问题。</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">根据现有数据，2025年2月（含春节假期）入住率表现突出的酒店如下：
+1. 盛都商务酒店（H007，midscale，suburban）：2月入住率均值89.85%，波动范围77.79%-100%，为所有酒店中表现最好。
+2. 君庭宾馆（H002，midscale，transport_hub）：2月入住率均值77.43%，峰值96.16%。
+3. 锦苑大酒店（H010，premium，transport_hub）：2月入住率均值78.57%，峰值100%。</div>
+                  </details></td></tr><tr>
+          <td><span style="color:#c8a96e;font-family:monospace">T02</span></td>
+          <td><span style="color:#c8a96e">temporal</span></td>
+          <td>暑假旺季酒店入住率变化如何？</td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">28970ms · 回答准确具体，基于2025年数据给出了7-8月入住率的整体趋势、具体数值、与全年均值的对比，还列举了单店及不同档次酒店的变化情况，直接完整地回答了问题。</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">根据2025年数据，暑假（7-8月）酒店入住率呈下降趋势：
+- 7月全局平均入住率为0.6051，8月降至0.5734，两个月均低于全年均值0.6351。
+- 单店来看，所有10家酒店7-8月入住率均持续下行，其中中端/高端酒店降幅明显，如盛都商务酒店（midscale suburban）从7月0.8214降至8月0.7942，君阁度假酒店（premium transport_hub）从7月0.4650降至8月0.4216。</div>
+                  </details></td><td>
+                  <div style="color:#4a9e6b;font-weight:600;margin-bottom:4px">5/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">31579ms · 回答准确具体，给出了2025年6-8月全局、各品牌及单店的入住率具体数值，清晰呈现了暑假旺季入住率下滑的变化情况，直接回答了问题</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">通常7-8月为北半球暑期，结合2025年数据：
+1. 全局趋势：6月平均入住率0.6507，7月降至0.6051，8月进一步降至全年最低的0.5734，整体呈下滑态势。
+2. 各品牌同步下滑：
+   - 中档（midscale）：6月0.7394→7月0.6870→8月0.6485
+   - 经济型（economy）：6月0.6645→7月0.6120→8月0.5899
+   - 高端（premium）：6月0.5864→7月0.5303→8月0.5117
+3. 单店示例：盛都商务酒店（midscale/suburban）6月0.8613→7月0.8214→8月0.7942。
+
+结论：2025年暑期未呈现入住率高峰，反而是全年低谷区间，较2-5月旺季明显回落。</div>
+                  </details></td></tr><tr>
+          <td><span style="color:#c8a96e;font-family:monospace">T03</span></td>
+          <td><span style="color:#c8a96e">temporal</span></td>
+          <td>十一黄金周期间酒店表现</td><td>
+                  <div style="color:#c8a96e;font-weight:600;margin-bottom:4px">3/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">27756ms · 回答提供了2025年10月全月酒店数据，但未单独拆分十一黄金周期间的表现，与问题需求有偏差</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">2025年10月全局酒店平均入住率为0.5785，低于2025年全年平均0.6351；10月峰值为0.9302，谷值为0.3416。
+分品牌看，10月入住率从高到低依次为：midscale（0.7462）、economy（0.5863）、premium（0.5472）。
+分区域看，10月入住率从高到低依次为：suburban（0.7085）、transport_hub（0.5648）、cbd（0.5266）。
+样本酒店中，10月表现最好的是盛都商务酒店（midscale，suburban，平均0.7914，峰值0.9302）；表现最差的是君阁度假酒店（premium，transport_hub，平均0.4445）。
+注：数据未单独拆分“十一黄金周”单日，为2025年10月全月统计。</div>
+                  </details></td><td>
+                  <div style="color:#c8a96e;font-weight:600;margin-bottom:4px">3/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">26486ms · 回答仅提供了2025年10月抽样的一家酒店3天及当月的入住率数据，未明确对应十一黄金周期间的整体表现，信息不够具体且样本单一。</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">2025年10月抽样的华阁宾馆（economy/transport_hub）3天入住率为59.2%-63.2%，当月平均入住率为58.63%，处于全年中下区间（低于1-5月旺季，高于8-9月低点）。</div>
+                  </details></td></tr><tr>
+          <td><span style="color:#c8a96e;font-family:monospace">T04</span></td>
+          <td><span style="color:#c8a96e">temporal</span></td>
+          <td>周末和工作日入住率差异大吗？</td><td>
+                  <div style="color:#9e4a4a;font-weight:600;margin-bottom:4px">1/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">28557ms · 回答承认无法回答问题，未提供有效信息。</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">现有统计摘要和检索数据未包含周末/工作日的分组入住率数据，无法分析两者差异。</div>
+                  </details></td><td>
+                  <div style="color:#9e4a4a;font-weight:600;margin-bottom:4px">1/5</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:6px">18611ms · 回答承认无法回答用户问题，未提供有效信息</div>
+                  <details><summary style="font-size:11px;color:#6b6560;cursor:pointer">查看回答</summary>
+                  <div style="font-size:12px;margin-top:6px;color:#c8c0b4;white-space:pre-wrap">当前提供的全局统计摘要及检索数据未按周末/工作日分组统计，无法直接判断差异。现有数据仅包含整体、品牌、区域、月份及单酒店（华阁宾馆）部分日期的入住率信息，建议补充周末/工作日的细分数据后再分析。</div>
+                  </details></td></tr></tbody></table>
+</body></html>
