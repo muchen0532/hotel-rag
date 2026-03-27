@@ -44,7 +44,7 @@ Keyword search has no "metro" field to match against, so it falls back to a vagu
 
 ## Evaluation
 
-A benchmark is conducted across 20 queries, covering different query types:
+Retrieval performance is benchmarked across 20 queries, covering different query types:
 
 - Semantic queries (e.g. "靠近地铁的酒店")
 - Keyword queries (exact match)
@@ -61,4 +61,4 @@ A benchmark is conducted across 20 queries, covering different query types:
 
 See full report:
 
-👉 `docs/eval_result/index.html`
+👉 [View Evaluation Report](https://muchen0532.github.io/hotel-rag/eval_result/)
