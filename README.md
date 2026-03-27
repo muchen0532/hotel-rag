@@ -61,4 +61,4 @@ Retrieval performance is benchmarked across 20 queries, covering different query
 
 See full report:
 
-👉 [View Evaluation Report](https://muchen0532.github.io/hotel-rag/eval_result/)
+👉 [View Evaluation Report](https://muchen0532.github.io/hotel-rag/eval_results/)
