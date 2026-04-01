@@ -1,5 +1,7 @@
 # hotel-rag
 
+English | [简体中文](README-CN.md)
+
 Hotel occupancy Q&A demo — Python data generation + Go HTTP service + LLM.
 
 Supports two retrieval modes: keyword search (default) and semantic vector search via Qdrant + Jina.
