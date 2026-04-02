@@ -6,6 +6,10 @@ Hotel occupancy Q&A demo — Python data generation + Go HTTP service + LLM.
 
 Supports two retrieval modes: keyword search (default) and semantic vector search via Qdrant + Jina.
 
+酒店入住率问答演示 — Python 数据生成 + Go HTTP 服务 + LLM。
+
+支持两种检索模式：关键词检索（默认）和语义向量检索（通过 Qdrant + Jina）。
+
 ## Stack
 
 | Layer | Tech |
